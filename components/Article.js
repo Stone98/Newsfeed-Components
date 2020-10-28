@@ -1,8 +1,9 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
 // This is the data we will be using to create our articles. Look at it, then proceed to line 93.
 // OPTIONAL: if you're feeling adventurous, try to make this data an export from a different module, and import it here.
 // You can read about ES6 modules here: https://exploringjs.com/es6/ch_modules.html#sec_basics-of-es6-modules
-const data = [
-  {
+const data = [{
     title: 'Lambda School Students: "We\'re the best!"',
     date: 'Nov 5th, 2018',
     firstParagraph: `Lucas ipsum dolor sit amet ben twi'lek padmé darth darth darth moff hutt organa twi'lek. Ben amidala secura skywalker lando
@@ -22,8 +23,7 @@ const data = [
         naboo ackbar tatooine. Hutt lars padmé darth. Maul solo darth darth jabba qui-gon chewbacca darth maul. Moff baba wicket
         han. C-3po antilles moff qui-gon ahsoka aayla dooku amidala. Palpatine droid amidala droid k-3po twi'lek padmé wookiee. Leia
         moff calamari mon obi-wan. Solo grievous lando coruscant. Jinn darth palpatine obi-wan mon.`
-  },
-  {
+}, {
     title: 'Javascript and You, ES6',
     date: 'May 7th, 2019',
     firstParagraph: `Alohamora wand elf parchment, Wingardium Leviosa hippogriff, house dementors betrayal. Holly, Snape centaur portkey ghost
@@ -42,8 +42,7 @@ const data = [
         Petrificus Totalus. So thirsty, deluminator firs’ years follow me 12 inches of parchment. Head Boy start-of-term banquet Cleansweep Seven 
         roaring lion hat. Unicorn blood crossbow mars is bright tonight, feast Norwegian Ridgeback. Come seek us where our voices sound, we cannot 
         sing above the ground, Ginny Weasley bright red. Fanged frisbees, phoenix tears good clean match.`
-  },
-  {
+}, {
     title: 'React vs Angular vs Vue',
     date: 'June 7th, 2019',
     firstParagraph: `Bulbasaur Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ivysaur Lorem ipsum dolor sit amet, consectetur adipiscing
@@ -70,8 +69,7 @@ const data = [
     thirdParagraph: `Gotta catch 'em all Horsea gym Ninjask Absol Sinnoh Poliwag. Gotta catch 'em all Youngster wants to fight Soda Pop Floatzel 
         Leech Life Seismitoad Ariados. Earthquake Pokemon Glitch City Tail Whip Skitty Ekans Dialga. Ut aliquip ex ea commodo consequat James 
         Castform Lotad the power that's inside Burnt Berry Makuhita. Ghost Ariados Corphish Dusclops Golbat Gligar Zweilous.`
-  },
-  {
+}, {
     title: 'Professional Software Development in 2019',
     date: 'Jan 1st, 2019',
     firstParagraph: `Hodor hodor HODOR! Hodor hodor - hodor, hodor. Hodor hodor... Hodor hodor hodor; hodor hodor. Hodor hodor hodor, hodor, hodor
@@ -86,8 +84,15 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
-  }
-];
+}, {
+    title: 'We the best',
+    date: 'Jan 13th, 2019',
+    firstParagraph: `Nulla quis lorem ut libero malesuada feugiat. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Sed porttitor lectus nibh. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. `,
+
+    secondParagraph: `Cras ultricies ligula sed magna dictum porta. Donec rutrum congue leo eget malesuada. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Sed porttitor lectus nibh. `,
+
+    thirdParagraph: `Sed porttitor lectus nibh. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Pellentesque in ipsum id orci porta dapibus. Pellentesque in ipsum id orci porta dapibus.`
+}];
 
 /*
   Step 1: Write a component called 'articleMaker' to create an article.
@@ -114,3 +119,44 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+const articles = document.querySelector('.articles');
+
+function articleMaker({
+    title,
+    date,
+    firstParagraph,
+    secondParagraph,
+    thirdParagraph
+}) {
+    const article = document.createElement('div');
+    const articleTitle = document.createElement('h2');
+    const articleDate = document.createElement('p');
+    const articleFirstParagraph = document.createElement('p');
+    const articleSecondParagraph = document.createElement('p');
+    const articleThirdParagraph = document.createElement('p');
+    const articleExpand = document.createElement('span');
+
+    article.appendChild(articleTitle);
+    article.appendChild(articleDate);
+    article.appendChild(articleFirstParagraph);
+    article.appendChild(articleSecondParagraph);
+    article.appendChild(articleThirdParagraph);
+    article.appendChild(articleExpand);
+
+    article.classList.add('article');
+    articleDate.classList.add('date');
+    articleExpand.classList.add('expandButton');
+
+    articleTitle.textContent = title;
+    articleDate.textContent = date;
+    articleFirstParagraph.textContent = firstParagraph;
+    articleSecondParagraph.textContent = secondParagraph;
+    articleThirdParagraph.textContent = thirdParagraph;
+    articleExpand.textContent = '+';
+
+    articleExpand.addEventListener('click', (event) => {
+        article.classList.toggle('article-open');
+    });
+    return article;
+}
+data.forEach(articleObj => articles.appendChild(articleMaker(articleObj)));
