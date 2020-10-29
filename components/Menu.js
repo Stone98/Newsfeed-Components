@@ -1,12 +1,13 @@
+/* eslint-disable no-unused-vars */
 // This is the data we will be using, study it but don't change anything, yet.
 
 let menuItems = [
-  'Students',
-  'Faculty',
-  "What's New",
-  'Tech Trends',
-  'Music',
-  'Log Out'
+    'Students',
+    'Faculty',
+    "What's New",
+    'Tech Trends',
+    'Music',
+    'Log Out'
 ];
 
 /* 
@@ -31,3 +32,31 @@ let menuItems = [
 
   Step 6: Use 'menuMaker' to create a menu using the 'menuItems' array, and append the returned menu to the header.
 */
+const headerSection = document.querySelector('.header')
+
+function menuMaker(array) {
+    let menu = document.querySelector('#menuList');
+    if (menu) {
+        return menu;
+    } else {
+        menu = document.createElement('div');
+        menu.setAttribute('id', 'menuList');
+        headerSection.appendChild(menu);
+        let list = document.createElement('ul');
+        menu.appendChild(list);
+
+        menu.classList.add('menu');
+
+        array.forEach((item) => {
+            let elm = document.createElement('li');
+            elm.textContent = item;
+            list.appendChild(elm);
+        })
+        return menu;
+    }
+}
+let menuButton = document.querySelector('.menu-button');
+menuButton.addEventListener('click', (event) => {
+    let menu = menuMaker(menuItems);
+    menu.classList.toggle('menu--open');
+})
